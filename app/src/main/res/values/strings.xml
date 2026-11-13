@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">aplikasi saya</string>
+    <string name="entry_siswa">tambah siswa</string>
+    <string name="deskripsi_no_item">Tidak ada data siswa</string>
+    <string name="nama">nama siswa</string>
+    <string name="alamat">Alamat siswa</string>
+    <string name="telpon">telpon siswa</string>
+    <string name="nama1">nama siswa</string>
+    <string name="alamat1">alamat siswa</string>
+    <string name="telpon1">telpon siswa</string>
+    <string name="required_field">* Ehhh, tolong di isi ya</string>
+    <string name="btn_submit">Submit</string>
+    <string name="detail_siswa">detail siswa</string>
+    <string name="edit_siswa">edit siswa</string>
+    <string name="back">kembali</string>
+    <string name="yes">ya</string>
+    <string name="no">tidak</string>
+    <string name="delete">Hapus</string>
+    <string name="update">edit</string>
+    <string name="attention">Perhatian</string>
+    <string name="tanya">yakinn luuuwwwhh mau di hapus?</string>
 </resources>
