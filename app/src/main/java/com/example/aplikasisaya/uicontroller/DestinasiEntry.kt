@@ -1,4 +1,8 @@
 package com.example.aplikasisaya.uicontroller
 
-object DestinasiEntry {
+import com.example.aplikasisaya.R
+
+object DestinasiEntry : DestinasiNavigasi {
+    override val route = "item_entry"
+    override val titleRes = R.string.entry_siswa
 }
