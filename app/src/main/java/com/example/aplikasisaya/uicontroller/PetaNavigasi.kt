@@ -16,8 +16,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.aplikasisaya.R
-import com.example.aplikasisaya.view.DestinasiEntry
-import com.example.aplikasisaya.view.DestinasiHome
+import com.example.aplikasisaya.uicontroller.DestinasiEntry
+import com.example.aplikasisaya.uicontroller.DestinasiHome
 import com.example.aplikasisaya.view.EntrySiswaScreen
 import com.example.aplikasisaya.view.HomeScreen
 @Composable
@@ -47,6 +47,7 @@ fun SiswaTopAppBar(
             }
         })
 }
+@Composable
 fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
