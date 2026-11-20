@@ -9,7 +9,7 @@ interface RepositoriSiswa {
     suspend fun insertSiswa(siswa: Siswa)
     //3 fungsi baru
     fun getSiswaStream(id: Int): Flow<Siswa?>
-    fun deleteSiswa(siswa: Siswa)
+    suspend fun deleteSiswa(siswa: Siswa)
 
 
 }
