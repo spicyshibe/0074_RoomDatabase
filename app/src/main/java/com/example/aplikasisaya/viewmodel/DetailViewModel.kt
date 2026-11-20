@@ -28,6 +28,17 @@ class DetailViewModel (
                 initialValue = DetailsSiswaUiState()
             )
 
+    suspend fun deleteSiswa() {
+        repositoriSiswa.deleteSiswa(uiDetailedState.value.detailsSiswa.toSiswa())
+    }
 
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
+    }
 }
 
+// UI STATE FOR ITEMDETAILSSCREEN
+
+data class DetailsSiswaUiState(
+    val detailsSiswa: DetailsSiswa = DetailsSiswa()
+)
