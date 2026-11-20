@@ -1,14 +1,19 @@
 package com.example.aplikasisaya.view
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -16,29 +21,38 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.aplikasisaya.R
+import com.example.aplikasisaya.room.Siswa
 import com.example.aplikasisaya.uicontroller.DestinasiDetailSiswa
 import com.example.aplikasisaya.uicontroller.SiswaTopAppBar
 import com.example.aplikasisaya.viewmodel.DetailViewModel
+import com.example.aplikasisaya.viewmodel.DetailsSiswaUiState
 import com.example.aplikasisaya.viewmodel.PenyediaViewModel
-import com.example.aplikasisaya.R
+import com.example.aplikasisaya.viewmodel.toSiswa
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailSiswaScreen(
-    //navigateToEditItem: (Int) -> Unit,
+    navigateToEditItem: (Int) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
+    val uiState = viewModel.uiDetailedState.collectAsState()
     Scaffold(
         topBar = {
             SiswaTopAppBar(
@@ -48,10 +62,9 @@ fun DetailSiswaScreen(
             )
         },
         floatingActionButton = {
-            val uiState = viewModel.uiDetailState.collectAsState()
             FloatingActionButton(
                 onClick = {
-                    //navigateToEditItem(uiState.value.detailSiswa.id)
+                    navigateToEditItem(uiState.value.detailsSiswa.id)
                 },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
@@ -63,7 +76,6 @@ fun DetailSiswaScreen(
             }
         }, modifier = modifier
     ) { innerPadding ->
-        val uiState = viewModel.uiDetailState.collectAsState()
         val coroutineScope = rememberCoroutineScope()
         BodyDetailDataSiswa(
             detailSiswaUiState = uiState.value,
@@ -80,7 +92,7 @@ fun DetailSiswaScreen(
 
 @Composable
 private fun BodyDetailDataSiswa(
-    detailSiswaUiState: DetailSiswaUiState,
+    detailSiswaUiState: DetailsSiswaUiState,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -90,7 +102,7 @@ private fun BodyDetailDataSiswa(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         DetailDataSiswa(
-            siswa = detailSiswaUiState.detailSiswa.toSiswa(),
+            siswa = detailSiswaUiState.detailsSiswa.toSiswa(),
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedButton(
