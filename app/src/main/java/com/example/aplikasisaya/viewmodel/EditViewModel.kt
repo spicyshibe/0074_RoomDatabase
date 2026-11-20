@@ -17,6 +17,8 @@ class EditViewModel (
 ):
     ViewModel() {
 
+        var uiStateSiswa by mutableStateOf(UIStateSiswa())
+        private set
 
 
 }
