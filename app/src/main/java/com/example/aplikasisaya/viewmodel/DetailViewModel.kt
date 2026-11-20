@@ -15,5 +15,19 @@ class DetailViewModel (
     savedStateHandle: SavedStateHandle,
     private val repositoriSiswa: RepositoriSiswa): ViewModel() {
 
+    private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiDetailSiswa.itermIdArg])
+
+    val uiDetailedState: StateFlow<DetailsSiswaUiState> =
+        repositoriSiswa.getSiswaStream(idSiswa)
+            .filterNotNull()
+            .map{
+                DetailsSiswaUiState(detailsSiswa = it.toDetailsSiswa())
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+                initialValue = DetailsSiswaUiState()
+            )
+
+
 }
 
